@@ -1,0 +1,154 @@
+// @import "~bootstrap/scss/bootstrap";
+
+.lists-movie {
+    // padding: 0px 0 30px 0;
+    background-color: #141414;
+    overflow-x: hidden;
+
+    padding: 0 30px;
+    padding-bottom: 30px;
+
+    &__title {
+        margin-top: 20px;
+        padding: 5px 10px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        cursor: pointer;
+
+        .title__text {
+            text-align: center;
+            vertical-align: middle;
+
+            font-size: 1.2vw;
+            color: #e5e5e5;
+            font-weight: 700;
+            padding: 5px 12px;
+            margin: 5px 10px;
+
+            border-radius: 7px;
+            border: 1px solid rgba(50, 214, 99, 0.897);
+
+            &:hover {
+                opacity: 0.5;
+            }
+        }
+
+        .activeGenres {
+            color: #000;
+            background-color: #fff;
+        }
+    }
+
+    &__lists {
+        padding: 20px;
+        margin-top: 40px;
+        .title {
+            color: rgb(241, 214, 214);
+            font-size: 20px;
+            font-weight: 600;
+            margin-left: 15px;
+        }
+        .lists {
+            margin-top: 10px;
+            .item {
+                position: relative;
+                overflow: hidden;
+                cursor: pointer;
+
+                &__banner {
+                    margin: 0 10px;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+                &:hover .item__banner {
+                    filter: blur(4px);
+                }
+
+                &:hover .item__movie-information {
+                    transform: translateY(0%);
+                }
+
+                &__movie-information {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+
+                    padding: 10px 20px;
+                    height: 327.5px;
+
+                    transform: translateY(100%);
+                    transition: transform 0.3s ease-in-out;
+
+                    .btn-func {
+                        display: flex;
+                        justify-content: center;
+                        gap: 0 30px;
+
+                        button {
+                            background-color: darkslategray;
+                            border: none;
+                            color: #fff;
+
+                            border-radius: 7px;
+                            font-size: 16px;
+
+                            font-weight: 600;
+                            padding: 8px 16px;
+
+                            text-align: center;
+
+                            &:hover {
+                                opacity: 0.7;
+                            }
+                        }
+                    }
+
+                    .infor {
+                        &-top {
+                            margin-top: 10px;
+
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+                            gap: 0 10px;
+
+                            h1 {
+                                color: rgb(241, 232, 232);
+                                font-size: 19px;
+                                font-weight: bolder;
+                            }
+                            span {
+                                font-weight: 800;
+                                font-size: 17px;
+                                color: rgb(192, 175, 24);
+
+                                display: flex;
+                                align-self: flex-start;
+                            }
+                        }
+
+                        &-bottom {
+                            color: rgb(233, 160, 160);
+
+                            font-size: 15px;
+                            overflow-y: scroll;
+                            max-height: 200px;
+
+                            &::-webkit-scrollbar {
+                                display: none; /* for Chrome, Safari, and Opera */
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

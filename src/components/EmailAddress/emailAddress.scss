@@ -1,0 +1,54 @@
+.emailAddress {
+    margin: 0 auto;
+    width: 50%;
+
+    .small-text {
+        margin-top: 20px;
+        font-family: Netflix Sans;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 16px;
+        /* identical to box height */
+
+        text-align: center;
+
+        /* White */
+        color: #ffffff;
+    }
+
+    .form-email {
+        margin-top: 25px;
+        height: 70px;
+        display: flex;
+
+        input {
+            width: 75%;
+            padding: 10px 20px;
+
+            font-family: Netflix Sans;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 20.4857px;
+            line-height: 26px;
+
+            color: #797979;
+        }
+
+        button {
+            width: 25%;
+            border: none;
+
+            font-family: Netflix Sans;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 25px;
+            line-height: 40px;
+            /* identical to box height */
+
+            /* White */
+            background: #d6000f;
+            color: #ffffff;
+        }
+    }
+}

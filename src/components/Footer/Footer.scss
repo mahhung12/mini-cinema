@@ -1,0 +1,49 @@
+.footer-container {
+    background-color: #141414;
+    border-top: 8px solid #222;
+
+    width: 100%;
+    color: #fff;
+
+    // margin-top: 50px;
+    padding: 50px 250px;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 15px 0;
+    flex-direction: column;
+
+    .contactUs {
+        font-size: 1rem;
+        color: #757575;
+        font-weight: normal;
+    }
+
+    .link-items {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 50px;
+
+        .item {
+            width: 20%;
+            font-size: 0.8rem;
+            color: #757575;
+            font-weight: light;
+
+            &:hover {
+            }
+        }
+    }
+
+    .languages {
+        padding: 5px 17px;
+
+        font-family: Netflix Sans;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 1rem;
+        line-height: 26px;
+        cursor: pointer;
+    }
+}
