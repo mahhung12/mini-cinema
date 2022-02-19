@@ -1,38 +1,46 @@
 .emailAddress {
-    margin: 0 auto;
-    width: 50%;
+    margin: 20px auto;
+    margin-top: 40px;
+
+    max-width: 90%;
+    text-align: center;
+
+    @media screen and (max-width: 768px) {
+        margin-top: 10px;
+    }
 
     .small-text {
-        margin-top: 20px;
         font-family: Netflix Sans;
-        font-style: normal;
-        font-weight: normal;
-        font-size: 20px;
-        line-height: 16px;
-        /* identical to box height */
+        font-size: 35px;
 
-        text-align: center;
-
-        /* White */
-        color: #ffffff;
+        @media screen and (max-width: 768px) {
+            font-size: 15px;
+        }
     }
 
     .form-email {
-        margin-top: 25px;
         height: 70px;
         display: flex;
+
+        @media screen and (max-width: 768px) {
+            height: 50px;
+        }
 
         input {
             width: 75%;
             padding: 10px 20px;
 
             font-family: Netflix Sans;
-            font-style: normal;
             font-weight: normal;
-            font-size: 20.4857px;
+            font-size: 25px;
             line-height: 26px;
 
             color: #797979;
+
+            @media screen and (max-width: 768px) {
+                padding: 5px 10px;
+                font-size: 17px;
+            }
         }
 
         button {
@@ -40,15 +48,16 @@
             border: none;
 
             font-family: Netflix Sans;
-            font-style: normal;
-            font-weight: normal;
             font-size: 25px;
             line-height: 40px;
-            /* identical to box height */
 
-            /* White */
             background: #d6000f;
             color: #ffffff;
+
+            @media screen and (max-width: 768px) {
+                line-height: 1;
+                font-size: 13px;
+            }
         }
     }
 }

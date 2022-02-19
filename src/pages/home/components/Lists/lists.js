@@ -19,6 +19,30 @@ const settings = {
     speed: 500,
     slidesToScroll: 3,
     slidesToShow: 6,
+
+    responsive: [
+        {
+            breakpoint: 1024,
+            settings: {
+                slidesToShow: 4,
+                slidesToScroll: 4,
+            },
+        },
+        {
+            breakpoint: 768,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 3,
+            },
+        },
+        {
+            breakpoint: 425,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 2,
+            },
+        },
+    ],
 };
 
 function Lists() {
@@ -85,9 +109,7 @@ function Lists() {
                         {detail.title}
                     </Modal.Title>
                 </Modal.Header>
-                <Modal.Body
-                    style={{ backgroundColor: "#000000" }}
-                >
+                <Modal.Body style={{ backgroundColor: "#000000" }}>
                     <ReactPlayer
                         className="container-fluid"
                         url={youtubeUrl + detail.key}
@@ -123,10 +145,7 @@ function Lists() {
         );
     };
 
-    const MovieListsComponents = ({
-        getMovieByGenre,
-        title,
-    }) => {
+    const MovieListsComponents = ({ getMovieByGenre, title }) => {
         return (
             <div className="lists-movie__lists">
                 <div className="title">{title}</div>
@@ -134,10 +153,7 @@ function Lists() {
                     <Slider {...settings}>
                         {getMovieByGenre.map((movie) => {
                             return (
-                                <div
-                                    key={movie.id}
-                                    className="item"
-                                >
+                                <div key={movie.id} className="item">
                                     <div className="item__banner">
                                         <img
                                             src={movie.poster}
@@ -149,27 +165,17 @@ function Lists() {
                                         <div className="btn-func">
                                             <button
                                                 onClick={() =>
-                                                    onWatchClick(
-                                                        movie.id
-                                                    )
+                                                    onWatchClick(movie.id)
                                                 }
                                             >
-                                                (Watch)
+                                                Watch
                                             </button>
-                                            <button>
-                                                (Add)
-                                            </button>
+                                            <button>Add</button>
                                         </div>
                                         <div className="infor">
                                             <div className="infor-top">
-                                                <h1>
-                                                    {movie.title}
-                                                </h1>
-                                                <span>
-                                                    {
-                                                        movie.rating
-                                                    }
-                                                </span>
+                                                <h1>{movie.title}</h1>
+                                                <span>{movie.rating}</span>
                                             </div>
                                             <div className="infor-bottom">
                                                 {movie.overview}
