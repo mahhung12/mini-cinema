@@ -12,7 +12,6 @@ function App() {
         <div className="App">
             <Routes>
                 <Route path="*" element={<NotFound />} />
-
                 <Route path="/" element={<Landing />} />
                 <Route path="/home" element={<Home />} />
                 <Route path="/account" element={<Account />} />
