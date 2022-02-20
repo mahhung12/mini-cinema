@@ -15,11 +15,7 @@ function Home() {
             />
             <div className="home-container__top-items">
                 <Link to="/" className="img-cover">
-                    <img
-                        src={netflix}
-                        alt="netflix-logo"
-                        srcSet=""
-                    />
+                    <img src={netflix} alt="netflix-logo" srcSet="" />
                 </Link>
 
                 <div className="btn-func">
@@ -28,7 +24,7 @@ function Home() {
                         <option value="fr">France</option>
                         <option value="vn">Vietnam</option>
                     </select>
-                    <Link to="/account" className="button">
+                    <Link to="/login" className="button">
                         Login
                     </Link>
                 </div>
