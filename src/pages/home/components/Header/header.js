@@ -1,4 +1,3 @@
-import "boxicons";
 import React from "react";
 import { Link } from "react-router-dom";
 import netflixLogo from "../../../../assests/imgs/netflix.png";
