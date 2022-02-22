@@ -2,11 +2,11 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.scss";
 
-import NotFound from "./components/NotFound";
-import Account from "./pages/account/account";
-import Home from "./pages/home";
-import Landing from "./pages/landing/index";
-import Login from "./components/Auth/Login/login";
+import NotFound from "components/NotFound";
+import Account from "pages/account/account";
+import Home from "pages/home";
+import Landing from "pages/landing/index";
+import Login from "components/Auth/SignIn";
 
 function App() {
     return (

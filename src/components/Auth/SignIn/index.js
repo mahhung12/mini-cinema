@@ -1,18 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import { Link } from "react-router-dom";
-import "./login.scss";
+import AuthContext from "components/Auth/AuthProvider/authProvider";
+
 import {
     getUserById,
     createNewUser,
     getUserByNamePassword,
 } from "api/users";
-
-import InputField from "features/custom-fields/InputField";
-import { FastField, Form, Formik } from "formik";
+import "./signin.scss";
 
 const Login = () => {
+    const { setAuth } = useContext(AuthContext);
+
     const [clicked, setClicked] = useState();
     const [getUserId, setGetUserId] = useState();
+    const [success, setSuccess] = useState(false);
+
+    const userRef = useRef();
+
+    const [SignUpForm, setSignUpForm] = useState({
+        username: "",
+        email: "",
+        password: "",
+    });
+
+    const [SignInForm, setSignInForm] = useState({
+        username: "",
+        password: "",
+    });
 
     useEffect(() => {
         const getUser = async () => {
@@ -28,6 +43,55 @@ const Login = () => {
         console.log(getUserId);
     };
 
+    const handleSignUpClick = async (bool) => {
+        setClicked(!clicked);
+
+        if (bool) {
+            //Call API here
+            console.log("true");
+
+            await createNewUser(SignUpForm);
+
+            setSignUpForm({
+                username: "",
+                email: "",
+                password: "",
+            });
+        }
+    };
+
+    const handleSignInClick = async () => {
+        const userCheck = await getUserByNamePassword(SignInForm);
+
+        if (userCheck) {
+            setSuccess(true);
+            alert("done");
+        } else {
+            alert("user not exist");
+        }
+        setSignInForm({
+            username: "",
+            password: "",
+        });
+        // console.log("user data : " + userCheck);
+    };
+
+    const handleOnChangeSignUpForm = (e, id) => {
+        let copyForm = { ...SignUpForm };
+        copyForm[id] = e.target.value;
+        setSignUpForm({
+            ...copyForm,
+        });
+    };
+
+    const handleOnChangeSignInForm = (e, id) => {
+        let copyForm = { ...SignInForm };
+        copyForm[id] = e.target.value;
+        setSignInForm({
+            ...copyForm,
+        });
+    };
+
     return (
         <>
             <div className="form-container">
@@ -39,54 +103,83 @@ const Login = () => {
                     >
                         <h2
                             className="form-title"
-                            id="signup"
-                            onClick={() => onSignUpClickSlide(clicked)}
+                            onClick={() => handleSignUpClick(false)}
                         >
                             <span>or</span>Sign up
                         </h2>
+
                         <div className="form-holder">
                             <input
                                 type="text"
                                 className="input"
                                 placeholder="Username"
+                                value={SignUpForm.username}
+                                onChange={(e) =>
+                                    handleOnChangeSignUpForm(e, "username")
+                                }
+                                ref={userRef}
                             />
                             <input
                                 type="text"
                                 className="input"
                                 placeholder="Email"
+                                value={SignUpForm.email}
+                                onChange={(e) =>
+                                    handleOnChangeSignUpForm(e, "email")
+                                }
                             />
                             <input
                                 type="password"
                                 className="input"
                                 placeholder="Password"
+                                value={SignUpForm.password}
+                                onChange={(e) =>
+                                    handleOnChangeSignUpForm(e, "password")
+                                }
                             />
                         </div>
-                        {/* <button className="submit-btn"> */}
-                        <div className="LinkDirect submit-btn">
+                        <div
+                            className="LinkDirect submit-btn"
+                            onClick={() => handleSignUpClick(true)}
+                        >
                             Sign up
                         </div>
-                        {/* </button> */}
                     </div>
 
                     <div className={!clicked ? "login" : "login slide-up"}>
                         <div className="center">
                             <h2
                                 className="form-title"
-                                id="login"
                                 onClick={() => onSignUpClickSlide(clicked)}
                             >
-                                <span>or</span>Log in
+                                <span>or</span>
+                                Log in
                             </h2>
                             <div className="form-holder">
                                 <input
                                     type="text"
                                     className="input"
                                     placeholder="Username"
+                                    value={SignInForm.username}
+                                    onChange={(e) =>
+                                        handleOnChangeSignInForm(
+                                            e,
+                                            "username"
+                                        )
+                                    }
+                                    ref={userRef}
                                 />
                                 <input
                                     type="password"
                                     className="input"
                                     placeholder="Password"
+                                    value={SignInForm.password}
+                                    onChange={(e) =>
+                                        handleOnChangeSignInForm(
+                                            e,
+                                            "password"
+                                        )
+                                    }
                                 />
                             </div>
                             <label className="forgot-password">
@@ -101,14 +194,15 @@ const Login = () => {
                             >
                                 {/* {this.state.errMessage} */}
                             </div>
-                            {/* <div */}
-                            <Link
+                            {/* <Link */}
+                            {/* to="/account" */}
+                            <div
                                 className="submit-btn loginbtn"
-                                to="/account"
+                                onClick={() => handleSignInClick()}
                             >
                                 Login
-                            </Link>
-                            {/* </div> */}
+                            </div>
+                            {/* </Link> */}
                             <div className="social-login">
                                 <h2>Or Login with</h2>
 
