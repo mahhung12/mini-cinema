@@ -9,7 +9,7 @@ const post = `${url}/users`;
 
 export const getUserById = async (id) => {
     try {
-        const { data } = await axiosClient.get(getById, id);
+        const { data } = await axiosClient.get("/users/", id);
 
         const modifiedData = data.map((m) => ({
             id: m.username,
@@ -33,7 +33,7 @@ export const createNewUser = async (user) => {
             image: "",
         };
 
-        await axiosClient.post(post, userData);
+        await axiosClient.post("/users", userData);
     } catch (error) {}
 };
 
@@ -44,12 +44,22 @@ export const getUserByNamePassword = async (user) => {
             password: user.password,
         };
 
-        const { data } = await axiosClient.get(getById, { params });
+        const data = await axiosClient.get("/users/", { params });
 
-        console.log(data);
+        const modifiedData = data.map((m) => ({
+            id: m.id,
+            username: m.username,
+            password: m.password,
+            email: m.email,
+            role: m.roleID,
+            image: m.image,
+        }));
 
-        return data;
-    } catch (error) {}
+        console.log(modifiedData);
+
+        // return JSON.stringify(modifiedData);
+        return modifiedData;
+    } catch (error) {
+        console.error("Error: ", error);
+    }
 };
-
-// Dừng lại ở axiosClient post thì đc, nhưng get by data thì k. hic :(

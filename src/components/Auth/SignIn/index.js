@@ -65,7 +65,26 @@ const Login = () => {
 
         if (userCheck) {
             setSuccess(true);
-            alert("done");
+
+            userCheck.map((user) => {
+                // console.log("All list: " + user);
+                console.log("All list: " + user[Object.keys(user)[0]]);
+                return console.log(user);
+
+                // if (
+                //     user.username === SignInForm.username &&
+                //     user.password === SignInForm.password
+                // ) {
+                //     return {
+                //         user: user.username,
+                //         pass: user.password,
+                //     };
+                // } else {
+                //     return alert(
+                //         "data just contains your keyword, but not exist"
+                //     );
+                // }
+            });
         } else {
             alert("user not exist");
         }
@@ -73,7 +92,6 @@ const Login = () => {
             username: "",
             password: "",
         });
-        // console.log("user data : " + userCheck);
     };
 
     const handleOnChangeSignUpForm = (e, id) => {
