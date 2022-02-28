@@ -61,33 +61,32 @@ const Login = () => {
     };
 
     const handleSignInClick = async () => {
-        const userCheck = await getUserByNamePassword(SignInForm);
+        const { userData, errCode, errMessage } =
+            await getUserByNamePassword(SignInForm);
 
-        if (userCheck) {
+        if (errCode === "1") {
             setSuccess(true);
+            alert(`errCode: ${errCode} - ${errMessage}`);
 
-            userCheck.map((user) => {
-                // console.log("All list: " + user);
-                console.log("All list: " + user[Object.keys(user)[0]]);
-                return console.log(user);
+            const { id, username, password, email, role, image } =
+                userData;
 
-                // if (
-                //     user.username === SignInForm.username &&
-                //     user.password === SignInForm.password
-                // ) {
-                //     return {
-                //         user: user.username,
-                //         pass: user.password,
-                //     };
-                // } else {
-                //     return alert(
-                //         "data just contains your keyword, but not exist"
-                //     );
-                // }
+            console.log("User login data ", {
+                userID: id,
+                username: username,
+                password: password,
+                email: email,
+                role: role,
+                image: image,
             });
+        } else if (errCode === "2") {
+            alert(`errCode: ${errCode} - ${errMessage}`);
+        } else if (errCode === "3") {
+            alert(`errCode: ${errCode} - ${errMessage}`);
         } else {
-            alert("user not exist");
+            alert(`errCode: ${errCode} - ${errMessage}`);
         }
+
         setSignInForm({
             username: "",
             password: "",

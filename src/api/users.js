@@ -39,26 +39,58 @@ export const createNewUser = async (user) => {
 
 export const getUserByNamePassword = async (user) => {
     try {
-        const params = {
-            username: user.username,
-            password: user.password,
-        };
+        if (user.username === "" && user.password === "") {
+            return {
+                errCode: "2",
+                errMessage: "Please enter username and password",
+            };
+        } else {
+            const params = {
+                username: user.username,
+                password: user.password,
+            };
 
-        const data = await axiosClient.get("/users/", { params });
+            const data = await axiosClient.get("/users/", { params });
 
-        const modifiedData = data.map((m) => ({
-            id: m.id,
-            username: m.username,
-            password: m.password,
-            email: m.email,
-            role: m.roleID,
-            image: m.image,
-        }));
+            let finalUser = {
+                id: "",
+                username: "",
+                password: "",
+                email: "",
+                role: "",
+                image: "",
+            };
 
-        console.log(modifiedData);
+            for (let i = 0; i < data.length; i++) {
+                const element = data[i];
+                if (
+                    element.username === user.username &&
+                    element.password === user.password
+                ) {
+                    finalUser.id = element.id;
+                    finalUser.username = element.password;
+                    finalUser.password = element.password;
+                    finalUser.email = element.email;
+                    finalUser.role = element.role;
+                    finalUser.image = element.image;
+                    break;
+                } else {
+                    return {
+                        errCode: "3",
+                        errMessage:
+                            "Check your username or password and try again.",
+                    };
+                }
+            }
 
-        // return JSON.stringify(modifiedData);
-        return modifiedData;
+            console.log("final user : ", finalUser);
+
+            return {
+                userData: finalUser,
+                errCode: "1",
+                errMessage: "Login succesfully",
+            };
+        }
     } catch (error) {
         console.error("Error: ", error);
     }
