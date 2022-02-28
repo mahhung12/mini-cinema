@@ -44,13 +44,24 @@ const Login = () => {
     };
 
     const handleSignUpClick = async (bool) => {
-        setClicked(!clicked);
-
         if (bool) {
             //Call API here
             console.log("true");
 
-            await createNewUser(SignUpForm);
+            const { errCode, errMessage } = await createNewUser(
+                SignUpForm
+            );
+
+            if (errCode === 1) {
+                setClicked(!clicked);
+                alert(`errCode: ${errCode} - ${errMessage}`);
+            } else if (errCode === 2) {
+                alert(`errCode: ${errCode} - ${errMessage}`);
+            } else if (errCode === 3) {
+                alert(`errCode: ${errCode} - ${errMessage}`);
+            } else {
+                alert(`errCode: ${errCode} - ${errMessage}`);
+            }
 
             setSignUpForm({
                 username: "",
@@ -64,9 +75,9 @@ const Login = () => {
         const { userData, errCode, errMessage } =
             await getUserByNamePassword(SignInForm);
 
-        if (errCode === "1") {
-            setSuccess(true);
+        if (errCode === 1) {
             alert(`errCode: ${errCode} - ${errMessage}`);
+            setSuccess(true);
 
             const { id, username, password, email, role, image } =
                 userData;
@@ -79,9 +90,9 @@ const Login = () => {
                 role: role,
                 image: image,
             });
-        } else if (errCode === "2") {
+        } else if (errCode === 2) {
             alert(`errCode: ${errCode} - ${errMessage}`);
-        } else if (errCode === "3") {
+        } else if (errCode === 3) {
             alert(`errCode: ${errCode} - ${errMessage}`);
         } else {
             alert(`errCode: ${errCode} - ${errMessage}`);
@@ -120,7 +131,7 @@ const Login = () => {
                     >
                         <h2
                             className="form-title"
-                            onClick={() => handleSignUpClick(false)}
+                            onClick={() => onSignUpClickSlide(false)}
                         >
                             <span>or</span>Sign up
                         </h2>

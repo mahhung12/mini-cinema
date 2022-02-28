@@ -25,25 +25,69 @@ export const getUserById = async (id) => {
 
 export const createNewUser = async (user) => {
     try {
-        const userData = {
-            username: user.username,
-            password: user.password,
-            email: user.email,
-            roleID: 2,
-            image: "",
-        };
+        if (
+            user.username === "" ||
+            user.password === "" ||
+            user.email === ""
+        ) {
+            return {
+                errCode: 2,
+                errMessage: "Please enter this field",
+            };
+        } else {
+            const userData = {
+                username: user.username,
+                password: user.password,
+                email: user.email,
+                roleID: 2,
+                image: "",
+            };
 
-        await axiosClient.post("/users", userData);
+            //Check account create already exists
+            const params = {
+                username: user.username,
+            };
+
+            const data = await axiosClient.get("/users/", { params });
+
+            for (let i = 0; i < data.length; i++) {
+                const element = data[i];
+                if (element.username === userData.username) {
+                    return {
+                        errCode: 3,
+                        errMessage:
+                            "This name is already in use, please try different names.",
+                    };
+                } else {
+                    await axiosClient.post("/users", userData);
+                    break;
+                }
+            }
+            return {
+                errCode: 1,
+                errMessage: "Create successfully",
+            };
+        }
     } catch (error) {}
 };
 
 export const getUserByNamePassword = async (user) => {
     try {
+        let errCode = 1;
+        let errMessage = null;
+
+        let finalUser = {
+            id: "",
+            username: "",
+            password: "",
+            email: "",
+            role: "",
+            image: "",
+        };
+
         if (user.username === "" && user.password === "") {
-            return {
-                errCode: "2",
-                errMessage: "Please enter username and password",
-            };
+            errCode = 2;
+            errMessage = "Please enter username and password";
         } else {
             const params = {
                 username: user.username,
@@ -52,45 +96,43 @@ export const getUserByNamePassword = async (user) => {
 
             const data = await axiosClient.get("/users/", { params });
 
-            let finalUser = {
-                id: "",
-                username: "",
-                password: "",
-                email: "",
-                role: "",
-                image: "",
-            };
+            if (data.length < 1) {
+                errCode = 3;
+                errMessage =
+                    "Check your username or password and try again.";
+            } else {
+                for (let i = 0; i < data.length; i++) {
+                    const element = data[i];
+                    if (
+                        element.username === user.username &&
+                        element.password === user.password
+                    ) {
+                        finalUser.id = element.id;
+                        finalUser.username = element.password;
+                        finalUser.password = element.password;
+                        finalUser.email = element.email;
+                        finalUser.role = element.role;
+                        finalUser.image = element.image;
 
-            for (let i = 0; i < data.length; i++) {
-                const element = data[i];
-                if (
-                    element.username === user.username &&
-                    element.password === user.password
-                ) {
-                    finalUser.id = element.id;
-                    finalUser.username = element.password;
-                    finalUser.password = element.password;
-                    finalUser.email = element.email;
-                    finalUser.role = element.role;
-                    finalUser.image = element.image;
-                    break;
-                } else {
-                    return {
-                        errCode: "3",
-                        errMessage:
-                            "Check your username or password and try again.",
-                    };
+                        errCode = 1;
+                        errMessage = "Successfully";
+
+                        break;
+                    } else {
+                        errCode = 3;
+                        errMessage =
+                            "Check your username or password and try again.";
+                    }
                 }
             }
 
-            console.log("final user : ", finalUser);
-
-            return {
-                userData: finalUser,
-                errCode: "1",
-                errMessage: "Login succesfully",
-            };
+            // console.log("final user : ", finalUser);
         }
+        return {
+            userData: finalUser,
+            errCode: errCode,
+            errMessage: errMessage,
+        };
     } catch (error) {
         console.error("Error: ", error);
     }
