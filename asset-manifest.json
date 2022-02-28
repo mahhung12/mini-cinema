@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/mini-cinema/static/css/main.89faf294.css",
-    "main.js": "/mini-cinema/static/js/main.108a5e9f.js",
+    "main.js": "/mini-cinema/static/js/main.c848d747.js",
     "static/css/330.da11be6e.chunk.css": "/mini-cinema/static/css/330.da11be6e.chunk.css",
     "static/js/330.c406e286.chunk.js": "/mini-cinema/static/js/330.c406e286.chunk.js",
     "static/css/726.48cce91a.chunk.css": "/mini-cinema/static/css/726.48cce91a.chunk.css",
@@ -20,7 +20,7 @@
     "static/media/tv.png": "/mini-cinema/static/media/tv.0049bc70babc1f94cf88.png",
     "index.html": "/mini-cinema/index.html",
     "main.89faf294.css.map": "/mini-cinema/static/css/main.89faf294.css.map",
-    "main.108a5e9f.js.map": "/mini-cinema/static/js/main.108a5e9f.js.map",
+    "main.c848d747.js.map": "/mini-cinema/static/js/main.c848d747.js.map",
     "330.da11be6e.chunk.css.map": "/mini-cinema/static/css/330.da11be6e.chunk.css.map",
     "330.c406e286.chunk.js.map": "/mini-cinema/static/js/330.c406e286.chunk.js.map",
     "726.48cce91a.chunk.css.map": "/mini-cinema/static/css/726.48cce91a.chunk.css.map",
@@ -32,6 +32,6 @@
   },
   "entrypoints": [
     "static/css/main.89faf294.css",
-    "static/js/main.108a5e9f.js"
+    "static/js/main.c848d747.js"
   ]
 }
