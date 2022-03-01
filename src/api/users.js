@@ -25,15 +25,15 @@ export const getUserById = async (id) => {
 
 export const createNewUser = async (user) => {
     try {
+        let errCode = 1;
+        let errMessage = null;
         if (
             user.username === "" ||
             user.password === "" ||
             user.email === ""
         ) {
-            return {
-                errCode: 2,
-                errMessage: "Please enter this field",
-            };
+            errCode = 2;
+            errMessage = "Please enter this field";
         } else {
             const userData = {
                 username: user.username,
@@ -43,31 +43,39 @@ export const createNewUser = async (user) => {
                 image: "",
             };
 
-            //Check account create already exists
             const params = {
                 username: user.username,
             };
 
             const data = await axiosClient.get("/users/", { params });
 
-            for (let i = 0; i < data.length; i++) {
-                const element = data[i];
-                if (element.username === userData.username) {
-                    return {
-                        errCode: 3,
-                        errMessage:
-                            "This name is already in use, please try different names.",
-                    };
-                } else {
-                    await axiosClient.post("/users", userData);
-                    break;
+            //Check account create already exists
+            if (data.length < 1) {
+                await axiosClient.post("/users", userData);
+
+                errCode = 1;
+                errMessage = "Create successfully";
+            } else {
+                for (let i = 0; i < data.length; i++) {
+                    const element = data[i];
+                    if (element.username === userData.username) {
+                        errCode = 3;
+                        errMessage =
+                            "This name is already in use, please try different names.";
+                    } else {
+                        await axiosClient.post("/users", userData);
+
+                        errCode = 1;
+                        errMessage = "Create successfully";
+                        break;
+                    }
                 }
             }
-            return {
-                errCode: 1,
-                errMessage: "Create successfully",
-            };
         }
+        return {
+            errCode: errCode,
+            errMessage: errMessage,
+        };
     } catch (error) {}
 };
 
@@ -125,8 +133,6 @@ export const getUserByNamePassword = async (user) => {
                     }
                 }
             }
-
-            // console.log("final user : ", finalUser);
         }
         return {
             userData: finalUser,

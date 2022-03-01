@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "components/Auth/AuthProvider/authProvider";
 
 import {
@@ -10,6 +10,7 @@ import {
 import "./signin.scss";
 
 const Login = () => {
+    const navigate = useNavigate();
     const { setAuth } = useContext(AuthContext);
 
     const [clicked, setClicked] = useState();
@@ -55,6 +56,12 @@ const Login = () => {
             if (errCode === 1) {
                 setClicked(!clicked);
                 alert(`errCode: ${errCode} - ${errMessage}`);
+
+                setSignUpForm({
+                    username: "",
+                    email: "",
+                    password: "",
+                });
             } else if (errCode === 2) {
                 alert(`errCode: ${errCode} - ${errMessage}`);
             } else if (errCode === 3) {
@@ -62,12 +69,6 @@ const Login = () => {
             } else {
                 alert(`errCode: ${errCode} - ${errMessage}`);
             }
-
-            setSignUpForm({
-                username: "",
-                email: "",
-                password: "",
-            });
         }
     };
 
@@ -90,6 +91,13 @@ const Login = () => {
                 role: role,
                 image: image,
             });
+
+            setSignInForm({
+                username: "",
+                password: "",
+            });
+
+            navigate("/account");
         } else if (errCode === 2) {
             alert(`errCode: ${errCode} - ${errMessage}`);
         } else if (errCode === 3) {
@@ -97,11 +105,6 @@ const Login = () => {
         } else {
             alert(`errCode: ${errCode} - ${errMessage}`);
         }
-
-        setSignInForm({
-            username: "",
-            password: "",
-        });
     };
 
     const handleOnChangeSignUpForm = (e, id) => {
@@ -137,34 +140,58 @@ const Login = () => {
                         </h2>
 
                         <div className="form-holder">
-                            <input
-                                type="text"
-                                className="input"
-                                placeholder="Username"
-                                value={SignUpForm.username}
-                                onChange={(e) =>
-                                    handleOnChangeSignUpForm(e, "username")
-                                }
-                                ref={userRef}
-                            />
-                            <input
-                                type="text"
-                                className="input"
-                                placeholder="Email"
-                                value={SignUpForm.email}
-                                onChange={(e) =>
-                                    handleOnChangeSignUpForm(e, "email")
-                                }
-                            />
-                            <input
-                                type="password"
-                                className="input"
-                                placeholder="Password"
-                                value={SignUpForm.password}
-                                onChange={(e) =>
-                                    handleOnChangeSignUpForm(e, "password")
-                                }
-                            />
+                            <div className="wrap-input">
+                                <input
+                                    type="text"
+                                    className="input inputRequired"
+                                    placeholder="Username"
+                                    value={SignUpForm.username}
+                                    onChange={(e) =>
+                                        handleOnChangeSignUpForm(
+                                            e,
+                                            "username"
+                                        )
+                                    }
+                                    ref={userRef}
+                                />
+                                <span className="textWarning">
+                                    Field warning
+                                </span>
+                            </div>
+                            <div className="wrap-input">
+                                <input
+                                    type="email"
+                                    className="input"
+                                    placeholder="Email"
+                                    value={SignUpForm.email}
+                                    onChange={(e) =>
+                                        handleOnChangeSignUpForm(
+                                            e,
+                                            "email"
+                                        )
+                                    }
+                                />
+                                <span className="textWarning">
+                                    Field warning
+                                </span>
+                            </div>
+                            <div className="wrap-input">
+                                <input
+                                    type="password"
+                                    className="input"
+                                    placeholder="Password"
+                                    value={SignUpForm.password}
+                                    onChange={(e) =>
+                                        handleOnChangeSignUpForm(
+                                            e,
+                                            "password"
+                                        )
+                                    }
+                                />
+                                <span className="textWarning">
+                                    Field warning
+                                </span>
+                            </div>
                         </div>
                         <div
                             className="LinkDirect submit-btn"

@@ -76,11 +76,9 @@
                 }
 
                 .languages {
-                    padding: 5px 17px;
-
+                    padding: 5px 10px;
+                    padding-right: 10px;
                     font-family: Netflix Sans;
-                    font-style: normal;
-                    font-weight: normal;
                     font-size: 20px;
                     line-height: 26px;
                     cursor: pointer;
@@ -92,7 +90,7 @@
                 }
 
                 .button {
-                    padding: 5px 17px;
+                    padding: 5px 10px;
                     border-radius: 3px;
                     border: none;
 
@@ -101,8 +99,6 @@
                     align-items: center;
 
                     font-family: Netflix Sans;
-                    font-style: normal;
-                    font-weight: normal;
                     font-size: 20px;
                     line-height: 26px;
                     text-decoration: none;
