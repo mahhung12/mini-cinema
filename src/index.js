@@ -7,12 +7,17 @@ import App from "./App";
 import "./index.scss";
 import reportWebVitals from "./reportWebVitals";
 
+import { store } from "store/store";
+import { Provider } from "react-redux";
+
 ReactDOM.render(
     <React.StrictMode>
         <AuthProvider>
+            {/* <Provider store={store}> */ }
             <Router>
                 <App />
             </Router>
+            {/* </Provider> */ }
         </AuthProvider>
     </React.StrictMode>,
     document.getElementById("root")

@@ -194,7 +194,7 @@
 
             .center {
                 position: absolute;
-                top: calc(50% - 10%);
+                top: calc(50% - 5%);
                 left: 50%;
                 transform: translate(-50%, -50%);
                 width: 65%;
@@ -302,15 +302,14 @@
                     margin-top: 25px;
                     // display: flex;
                     text-align: center;
+
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
-
                     h2 {
                         font-size: 20px;
                         font-weight: bold;
                     }
-
                     .socials {
                         margin-top: 10px;
 

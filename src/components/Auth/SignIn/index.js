@@ -9,7 +9,7 @@ import {
 } from "api/users";
 import "./signin.scss";
 
-const Login = () => {
+const Login = ({ token }) => {
     const navigate = useNavigate();
     const { setAuth } = useContext(AuthContext);
 
@@ -36,6 +36,7 @@ const Login = () => {
         };
 
         getUser();
+        // Make sure we un-register Firebase observers when the component unmounts.
         return () => {};
     }, []);
 
@@ -260,6 +261,11 @@ const Login = () => {
                             {/* </Link> */}
                             <div className="social-login">
                                 <h2>Or Login with</h2>
+
+                                {/* <StyledFirebaseAuth
+                                    uiConfig={uiConfig}
+                                    firebaseAuth={firebase.auth()}
+                                /> */}
 
                                 <div className="socials">
                                     <span className="social">Google</span>
